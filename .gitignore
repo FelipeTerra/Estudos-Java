@@ -1,0 +1,17 @@
+# Eclipse
+.metadata/
+.settings/
+.project
+.classpath
+
+# Java
+bin/
+target/
+*.class
+
+# Logs
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db
