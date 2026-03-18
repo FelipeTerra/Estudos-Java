@@ -38,7 +38,7 @@ public class Exercicio_pensionato {
 				System.out.println(i + ": " + vect[i]);
 			}
 		}
-		
+
 		sc.close();
 	}
 
