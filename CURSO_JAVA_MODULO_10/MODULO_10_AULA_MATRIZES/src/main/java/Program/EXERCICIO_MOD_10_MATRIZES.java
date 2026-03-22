@@ -15,29 +15,74 @@ public class EXERCICIO_MOD_10_MATRIZES {
         int m = sc.nextInt();
         int[][] matriz = new int[n][m];
 
+        System.out.println("Informe os valores da matriz: ");
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 matriz[i][j] = sc.nextInt();
             }
         }
+        System.out.println("Matriz gravada com sucesso");
+        System.out.println();
+        System.out.println("-----------------------------------");
 
         System.out.println("Informe um valor que desjesa procurar");
         int valor = sc.nextInt();
+        System.out.println();
+        System.out.println("-----------------------------------");
 
-        //procurando o valor
-        boolean buscador = false;
+        //contando quantas vezes o valor aparece na matriz
+        int contador = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (matriz[i][j] == valor) {
-                    buscador = true;
+                    contador ++;
                 }
             }
         }
-        if (buscador == false) {
-            System.out.print("Valor não encontrado na matriz");
-        }
-        else {
-            System.out.print("Valor encontrado na matriz");
+
+        //validando se o valor aparece na matriz
+        if (contador == 0) {
+            System.out.println("Valor não encontrado na matriz");
+        } else {
+            System.out.println("O valor aparece " + contador + " vezes ");
+
+            //imprimindo todas as ocorrências
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    if (matriz[i][j] == valor) {
+
+                        System.out.println("\nPosição: [" + i + "][" + j + "]");
+
+                        //esquerda
+                        if(j > 0){
+                            System.out.println("Valor a esquerda: " + matriz[i][j - 1]);
+                        } else {
+                            System.out.println("Não possui valor a esquerda");
+                        }
+
+                        //direita
+                        if(j < m - 1){
+                            System.out.println("Valor a direita: " + matriz[i][j + 1]);
+                        } else {
+                            System.out.println("Não possui valor a direita");
+                        }
+
+                        //acima
+                        if(i > 0){
+                            System.out.println("Valor acima: " + matriz[i - 1][j]);
+                        }  else {
+                            System.out.println("Não possui valor a acima");
+                        }
+
+                        //abaixo
+                        if(i < m - 1){
+                            System.out.println("Valor a abaixo: " + matriz[i + 1][j]);
+                        }  else {
+                            System.out.println("Não possui valor a abaixo");
+                        }
+                    }
+                }
+            }
         }
 
         sc.close();
