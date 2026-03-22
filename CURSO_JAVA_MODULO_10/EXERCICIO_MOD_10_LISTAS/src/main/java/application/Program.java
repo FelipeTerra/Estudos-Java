@@ -13,6 +13,7 @@ public class Program {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
+        //criando e instanciando a lista
         List<Funcionario> funcionarios = new ArrayList<>();
 
         System.out.println("Informe a quantidade de funcionários que serão cadastrados: ");
@@ -26,9 +27,11 @@ public class Program {
             double salario;
             boolean idExiste;
 
+
             do{
                 System.out.println("Informe o ID: ");
 
+                //verifica se o ID informado é diferente de um número, caso seja algum caractere informa que a entrada é invalida
                 while (!sc.hasNextInt()) {
                     System.out.println("Entrada inválida!");
                     sc.next(); // limpa o que foi digitado
@@ -36,6 +39,7 @@ public class Program {
 
                 idExiste = false;
 
+                //fazendo a verificação se o ID já existe
                 for(Funcionario f : funcionarios){
                     if(f.getId() == id){
                         idExiste = true;
@@ -50,6 +54,7 @@ public class Program {
             System.out.println("Informe o nome: ");
             String nome = sc.nextLine();
 
+            //verifica se o salário informado é diferente de um número, caso seja algum caractere informa que a entrada é invalida
             System.out.println("Informe o salario: ");
             while (!sc.hasNextDouble()) {
                 System.out.println("Entrada inválida!");
@@ -58,11 +63,40 @@ public class Program {
 
             funcionarios.add(new Funcionario(id,nome,salario));
         }
-
+        // Imprimindo a lista de funcionários
+        System.out.println("------------------------------------");
         System.out.println("Lista de Funcionários:");
         for (Funcionario f : funcionarios) {
             System.out.println(f);
         }
+        System.out.println("------------------------------------");
+
+        System.out.println("Informe o ID do funcionário que deseja aumentar o salário: ");
+        int idSalario = sc.nextInt();
+        boolean idExiste = false;
+
+        //procurando o funcionário
+        for(Funcionario f : funcionarios){
+            if(f.getId() == idSalario){
+                System.out.println("Informe o percentual de aumento: ");
+                double percentualAumento = sc.nextDouble();
+                f.calcularSalario(percentualAumento);
+                idExiste = true;
+                break;
+            }
+        }
+        if(!idExiste){
+            System.out.println("Funcionário não encontrado!");
+        }
+
+        //Imprimindo a lista atualizada
+        System.out.println("------------------------------------");
+        System.out.println("Lista de Funcionários Atualizada");
+        for (Funcionario f : funcionarios) {
+            System.out.println(f);
+        }
+
+
 
         sc.close();
     }
