@@ -1,10 +1,8 @@
 package Program;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Main {
     public static void main(String[] args) {
@@ -75,8 +73,37 @@ public class Main {
         System.out.println("Data/Hora Global " + dateFormatterGlobal.format(instant));
         System.out.println("--------------------------");
 
+        //Fazendo cálculos com Data/Hora
+        LocalDate date3 = LocalDate.parse("2022-02-20");
+        LocalDateTime dateTime3 = LocalDateTime.parse("2022-02-20T10:00:00");
+        Instant dateInstant3 = Instant.parse("2022-02-20T10:00:00Z");
+
+        LocalDate semanaPassada = date3.minusDays(7);
+        LocalDate proximaPassada = date3.plusDays(7);
+        System.out.println("------------------------------------");
+        System.out.println("Semana Passada: " + semanaPassada);
+        System.out.println("Proxima Semana: " + proximaPassada);
+
+        LocalDateTime semanaPassadaTime = dateTime3.minusDays(7);
+        LocalDateTime proximaPassadaTime = dateTime3.plusDays(7);
+        System.out.println("------------------------------------");
+        System.out.println("Semana Passada com Hora: " + semanaPassadaTime);
+        System.out.println("Proxima Semana com Hora: " + proximaPassadaTime);
+
+        Instant semanaPassadaInstant = dateInstant3.minus(7, ChronoUnit.DAYS);
+        Instant proximaPassadaInstant = dateInstant3.plus(7, ChronoUnit.DAYS);
+        System.out.println("------------------------------------");
+        System.out.println("Semana Passada Instant: " + semanaPassadaInstant);
+        System.out.println("Proxima Semana Instant: " + proximaPassadaInstant);
 
 
+        // calculando a duração entre duas datas/hora
+        System.out.println("------------------------------------");
+        Period t1 = Period.between(semanaPassada, date3);
+        System.out.println("T1: " + t1.getDays());
+        System.out.println("------------------------------------");
+        Duration t2 = Duration.between(semanaPassadaTime, dateTime3);
+        System.out.println("T2: " + t2.toDays());
 
 
     }
