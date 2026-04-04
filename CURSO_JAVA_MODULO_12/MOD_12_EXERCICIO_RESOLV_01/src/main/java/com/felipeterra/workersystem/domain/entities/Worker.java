@@ -18,11 +18,11 @@ public class Worker {
     public Worker(){
     }
 
-    public Worker(Department department, Double baseSalary, WorkerLevel level, String name) {
-        this.department = department;
-        this.baseSalary = baseSalary;
-        this.level = level;
+    public Worker( String name, WorkerLevel level, Double baseSalary, Department department) {
         this.name = name;
+        this.level = level;
+        this.baseSalary = baseSalary;
+        this.department = department;
     }
 
     public String getName() {
@@ -71,7 +71,7 @@ public class Worker {
 
     public double income(int year, int month){
 
-        double som = baseSalary;
+        double sum = baseSalary;
         Calendar calendar = Calendar.getInstance();
 
         for (HourContract contract: contracts){
@@ -84,5 +84,11 @@ public class Worker {
                 sum += contract.totalValue();
             }
         }
+        return sum;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
