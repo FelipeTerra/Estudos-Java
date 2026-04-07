@@ -66,11 +66,11 @@ public class Employee {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("ID: ").append(employeeID);
-        sb.append(" | Nome: ").append(name);
+        sb.append(" | Name: ").append(name);
         sb.append(" | Admissão: ").append(sdf.format(admissionDate));
-        sb.append(" | Salário Base: R$ ").append(String.format("%.2f", baseSalary));
-        sb.append(" | Bônus: R$ ").append(String.format("%.2f", getBonus()));
-        sb.append(" | Líquido: R$ ").append(String.format("%.2f", getNetSalary()));
+        sb.append(" | Base Salary: $ ").append(String.format("%.2f", baseSalary));
+        sb.append(" | Bonus: $ ").append(String.format("%.2f", getBonus()));
+        sb.append(" | Total Salary: $ ").append(String.format("%.2f", getNetSalary()));
         return sb.toString();
     }
 }
