@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Department {
     private String departmentName;
-    private String departmentID;
+    private Integer departmentID;
     private List<Employee> employees = new ArrayList<>();
 
     public Department(){}
 
-    public Department(String departmentName, String departmentID){
+    public Department(String departmentName, Integer departmentID){
         this.departmentName = departmentName;
         this.departmentID = departmentID;
     }
@@ -23,9 +23,9 @@ public class Department {
         this.departmentName = departmentName;
     }
 
-    public String getDepartmentID() { return departmentID; }
+    public Integer getDepartmentID() { return departmentID; }
 
-    public void setDepartmentID(String departmentID) {
+    public void setDepartmentID(Integer departmentID) {
         this.departmentID = departmentID;
     }
 
@@ -52,15 +52,14 @@ public class Department {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("-----------------------------------------\n");
-        sb.append(" | Department ID: ").append(departmentID);
-        sb.append(" | Department Name: ").append(departmentName);
-        sb.append(" | Total Payroll: $ ").append(String.format("%.2f", getTotalPayroll()));
-        sb.append("-----------------------------------------\n");
+        sb.append(" | Department ID: ").append(departmentID).append("\n");
+        sb.append(" | Department Name: ").append(departmentName).append("\n");
+        sb.append(" | Total Payroll: $ ").append(String.format("%.2f", getTotalPayroll())).append("\n");
         sb.append("--------------- Employees ---------------\n");
         for(Employee employee: employees){
             sb.append(employee.toString()).append("\n");
         }
-        sb.append("--------------------------------------------------");
+        //sb.append("--------------------------------------------------");
         return sb.toString();
     }
 }
