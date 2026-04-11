@@ -1,6 +1,6 @@
 package Entities;
 
-public class Contribuintes {
+public abstract class Contribuintes {
     private String nome;
     private Double rendaAnual;
 
@@ -19,8 +19,5 @@ public class Contribuintes {
 
     public void setRendaAnual(Double rendaAnual){ this.rendaAnual = rendaAnual;}
 
-    public Double calcularTotalArrecadado(){
-        Double total = 0.0;
-        return total;
-    }
+    public abstract Double calcularImposto();
 }
