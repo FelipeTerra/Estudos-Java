@@ -2,6 +2,7 @@ package Application;
 
 import Entities.Product;
 
+import javax.lang.model.util.ElementScanner6;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,55 +39,53 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-//        for (Product products : list) {
-//            System.out.println("Name: " + products.getName() + " | Price: " + products.getPrice() + " | Quantity: " + products.getQuantity());
-//        }
+        System.out.println("======================================================");
+        System.out.println("================ Produtos Originais ================");
+
+        for (Product products : list) {
+            System.out.println("Name: " + products.getName() + " | Price: " + products.getPrice() + " | Quantity: " + products.getQuantity());
+        }
+        System.out.println();
+
+        File sourceFile = new File(filePath); // cria um arquivo que serrá usado posteriormente para passar o caminho da pasta raiz para uma variável do tipo string
+        String sourceParent = sourceFile.getParent(); //passando o caminho da pasta raiz para a string
+
+        String targetFolder = sourceParent + "/out"; //criando o nome da pasta
+        String targetFile = targetFolder + "/summary.csv"; //criando o nome do novo arquivo
+
+        boolean success = new File(targetFolder).mkdir();
+
+        if (!success){
+            try (BufferedWriter bw = new BufferedWriter( new FileWriter(targetFile))) {
+                for (Product products : list){
+                    bw.write(products.getName() + "," + products.total());
+                    bw.newLine();
+                }
+            } catch (IOException e) {
+                System.out.println("Erro ao gravar o arquivo: " + e.getMessage());
+            }
+
+        }
+
+        System.out.println();
+        System.out.println("======================================================");
+        System.out.println("================ Produtos atualizados ================");
+
+
+        try (BufferedReader br = new BufferedReader(new FileReader(targetFile))) {
+            String line = br.readLine();
+            while (line != null) {
+                String[] fields = line.split(",");
+                System.out.println(" | Name: " + fields[0] + " | Total price: $" + fields[1]);
+                line = br.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
         sc.close();
     }
 }
-
-// Trabalhando com bloco try-with-resources
-// declarando uma variável do tipo string e passando para ela o camnho onde o arquivo está armazenado localmente
-
-//        String path = "c:\\temp\\in.txt";
-//        // aqui já estou declarando o BufferedReader e o FileReader dentro do próprio Try, de forma a não precisar abrir e fechar manualmente o arquivo.
-//        try ( BufferedReader br = new BufferedReader( new FileReader(path))) {
-//            String line = br.readLine();
-//            while (line != null) {
-//                System.out.println(line);
-//                line = br.readLine();
-//            }
-//        }
-//        catch (IOException e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
-
-// Trabalhando com BufferedWriter e FileWriter
-
-//String[] lines = new String[] { "Good Morning" , "Good afternoon" , "Good Night"}; // Criando um vetor de strings
-//String path = "c:\\temp\\out.txt"; // passando o local do arquivo
-
-//Criando o arquivo com o BufferedWriter e FileWriter
-//        try (
-//BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-//        for (String line : lines) {
-//        bw.write(line);
-//                bw.newLine();
-//            }
-//                    }
-//                    catch (
-//IOException e) {
-//        e.printStackTrace();
-//        }
-//
-//                //Imprimindo o arquivo criado
-//                try ( BufferedReader br = new BufferedReader( new FileReader(path))) {
-//String line = br.readLine();
-//            while (line != null) {
-//        System.out.println(line);
-//line = br.readLine();
-//            }
-//                    }
-//                    catch (IOException e) {
-//        System.out.println("Error: " + e.getMessage());
-//        }
