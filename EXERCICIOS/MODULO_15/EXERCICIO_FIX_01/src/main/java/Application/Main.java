@@ -53,19 +53,17 @@ public class Main {
         String targetFolder = sourceParent + "/out"; //criando o nome da pasta
         String targetFile = targetFolder + "/summary.csv"; //criando o nome do novo arquivo
 
-        boolean success = new File(targetFolder).mkdir();
+        new File(targetFolder).mkdir();// criando a nova pasta
 
-        if (!success){
-            try (BufferedWriter bw = new BufferedWriter( new FileWriter(targetFile))) {
-                for (Product products : list){
-                    bw.write(products.getName() + "," + products.total());
-                    bw.newLine();
-                }
-            } catch (IOException e) {
-                System.out.println("Erro ao gravar o arquivo: " + e.getMessage());
+        try (BufferedWriter bw = new BufferedWriter( new FileWriter(targetFile))) {
+            for (Product products : list){
+                bw.write(products.getName() + "," + products.total());
+                bw.newLine();
             }
-
+        } catch (IOException e) {
+            System.out.println("Erro ao gravar o arquivo: " + e.getMessage());
         }
+
 
         System.out.println();
         System.out.println("======================================================");
